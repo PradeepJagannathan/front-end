@@ -1,34 +1,49 @@
-
-import { QueryForm } from './QueryForm';
-import { Articles } from './Articles';
-import { useState, useEffect } from 'react';
-import { exampleQuery, exampleData } from './data';
+import { SavedQueries } from "./SavedQueries";
+import { QueryForm } from "./QueryForm";
+import { Articles } from "./Articles";
+import { useState, useEffect } from "react";
+import { exampleQuery, exampleData } from "./data";
 
 export function NewsReader() {
   const [query, setQuery] = useState(exampleQuery); // latest query send to newsapi
-  const [data, setData] = useState(exampleData);   // current data returned from newsapi
+  const [data, setData] = useState(exampleData); // current data returned from newsapi
   const [queryFormObject, setQueryFormObject] = useState({ ...exampleQuery });
   const urlNews = "/news";
+  const [savedQueries, setSavedQueries] = useState([{ ...exampleQuery }]);
 
   useEffect(() => {
     getNews(query);
-  }, [query])
+  }, [query]);
+
+  function onSavedQuerySelect(selectedQuery) {
+    setQueryFormObject(selectedQuery);
+    setQuery(selectedQuery);
+  }
 
   function onFormSubmit(queryObject) {
+    let newSavedQueries = [];
+    newSavedQueries.push(queryObject);
+    for (let query of savedQueries) {
+      if (query.queryName !== queryObject.queryName) {
+        newSavedQueries.push(query);
+      }
+    }
+    console.log(JSON.stringify(newSavedQueries));
+    setSavedQueries(newSavedQueries);
     setQuery(queryObject);
   }
 
   async function getNews(queryObject) {
     if (queryObject.q) {
-      console.log('Fetching news with query:', queryObject);
+      console.log("Fetching news with query:", queryObject);
       try {
         const response = await fetch(urlNews, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(queryObject),
         });
 
-        console.log('Response from server:', response);
+        console.log("Response from server:", response);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -36,7 +51,7 @@ export function NewsReader() {
         const data = await response.json();
         setData(data);
       } catch (error) {
-        console.error('Error fetching news:', error);
+        console.error("Error fetching news:", error);
       }
     } else {
       setData({});
@@ -45,21 +60,30 @@ export function NewsReader() {
 
   return (
     <div>
-      <div >
-        <section className="parent" >
+      <div>
+        <section className="parent">
           <div className="box">
-            <span className='title'>Query Form</span>
+            <span className="title">Query Form</span>
             <QueryForm
               setFormObject={setQueryFormObject}
               formObject={queryFormObject}
-              submitToParent={onFormSubmit} />
+              submitToParent={onFormSubmit}
+            />
           </div>
           <div className="box">
-            <span className='title'>Articles List</span>
+            <span className="title">Saved Queries</span>
+            <SavedQueries
+              savedQueries={savedQueries}
+              selectedQueryName={query.queryName}
+              onQuerySelect={onSavedQuerySelect}
+            />
+          </div>
+          <div className="box">
+            <span className="title">Articles List</span>
             <Articles query={query} data={data} />
           </div>
         </section>
       </div>
     </div>
-  )
+  );
 }
