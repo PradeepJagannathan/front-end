@@ -1,29 +1,46 @@
+import { useState } from "react";
+
 export function Articles(params) {
-    let articles = (params.data.articles)?params.data.articles:[];
-    let queryName = (params.query.queryName)?params.query.queryName:"na";
-    let articleCount = (params.data.totalResults)?params.data.totalResults:0;
-    return (
-      <div>
-        Query: {queryName}
-        <br/>Count: {articleCount}
-        <ol >{
-            articles.map((item, idx) => {
-              if(item){
-                if(item.title){
-                  if(item.title === "[Removed]"){
-                    return (<li key={idx} >Was Removed</li>);
-                  }
-                  let trimTitle = item.title.substring(0,30);
-                  return (<li key={idx}>{trimTitle}<a href={item.url} target="_blank" rel="noreferrer" >&nbsp;Link</a></li>);    
-                }else{
-                  return (<li key={idx}>No Title</li>);
-                }
-              }else{
-                return (<li key={1} >No Item</li>);
-              }
-            })
-        }</ol>
-      </div>
-    )
-  
-  }
+  let articles = (params.data.articles) ? params.data.articles : [];
+  let queryName = (params.query.queryName) ? params.query.queryName : "na";
+  let articleCount = (params.data.totalResults) ? params.data.totalResults : 0;
+
+  const [showList, setShowList] = useState(true);
+
+  const toggleList = () => {
+    setShowList(prev => !prev);
+  };
+
+  return (
+    <div>
+      Query: {queryName}
+      <br />Count: {articleCount}
+      <br />
+      <br />
+
+      <button onClick={toggleList}>
+        {showList ? 'Hide Query Results' : 'Show Query Results'}
+      </button>
+
+      {showList && (
+        <div id="articleList">
+          <ol>
+            {articles.map((item, idx) => {
+              if (!item) return <li key={idx}>No Item</li>;
+              if (!item.title) return <li key={idx}>No Title</li>;
+              if (item.title === "[Removed]") return <li key={idx}>Was Removed</li>;
+
+              const trimTitle = item.title.substring(0, 30);
+              return (
+                <li key={idx}>
+                  {trimTitle}
+                  <a href={item.url} target="_blank" rel="noreferrer">&nbsp;Link</a>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      )}
+    </div>
+  );
+}
