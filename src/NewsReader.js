@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { exampleQuery, exampleData } from "./data";
 import { LoginForm } from "./LoginForm";
 
-
 export function NewsReader() {
   const [query, setQuery] = useState(exampleQuery); // latest query send to newsapi
   const [data, setData] = useState(exampleData); // current data returned from newsapi
@@ -53,9 +52,9 @@ export function NewsReader() {
         } else {
           alert(
             "Error during authentication! " +
-              credentials.user +
-              "/" +
-              credentials.password
+            credentials.user +
+            "/" +
+            credentials.password
           );
           setCurrentUser(null);
         }
@@ -105,7 +104,7 @@ export function NewsReader() {
     }
     if (savedQueries.length >= 3 && currentUserMatches("guest")) {
       alert(
-        "guest users cannot submit new queries once saved query count is 3or greater!"
+        "Guest users cannot submit new queries once saved query count is 3 or greater!"
       );
       return;
     }
@@ -127,7 +126,7 @@ export function NewsReader() {
       alert("Log in if you want to reset queries!");
       return;
     }
-    
+
     /*if (!currentUserMatches("admin")) {
       alert("Only admin users can reset queries!");
       return;
@@ -168,15 +167,18 @@ export function NewsReader() {
   }, []);
 
   return (
-    <div>
-      <div>
+    <div className="newsreader-layout">
+      <div className="login-box">
         <LoginForm
           login={login}
           credentials={credentials}
           currentUser={currentUser}
           setCredentials={setCredentials}
         />
-        <section className="parent">
+      </div>
+
+      <section className="parent">
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
           <div className="box">
             <span className="title">Query Form</span>
             <QueryForm
@@ -202,8 +204,8 @@ export function NewsReader() {
               <Articles query={query} data={data} />
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

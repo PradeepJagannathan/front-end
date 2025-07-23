@@ -1,16 +1,33 @@
+import { useState } from "react";
+
 export function Articles(params) {
-    let articles = (params.data.articles)?params.data.articles:[];
-    let queryName = (params.query.queryName)?params.query.queryName:"na";
-    let articleCount = (params.data.totalResults)?params.data.totalResults:0;
-    return (
-      <div>
-        Query: {queryName}
-        <br/>Count: {articleCount}
-        <ol >{
+  let articles = (params.data.articles) ? params.data.articles : [];
+  let queryName = (params.query.queryName) ? params.query.queryName : "na";
+  let articleCount = (params.data.totalResults) ? params.data.totalResults : 0;
+
+  const [showList, setShowList] = useState(true);
+
+  const toggleList = () => {
+    setShowList(prev => !prev);
+  };
+
+  return (
+
+    <div className="container">
+      <p><strong>Query:</strong> {queryName}</p>
+      <p><strong>Count:</strong> {articleCount}</p>
+
+      <button onClick={toggleList}>
+        {showList ? 'Hide Query Results' : 'Show Query Results'}
+      </button>
+
+      {showList && (
+        <div id="articleList">
+          <ol >{
             articles.map((item, idx) => {
-              if(item){
-                if(item.title){
-                  if(item.title === "[Removed]"){
+              if (item) {
+                if (item.title) {
+                  if (item.title === "[Removed]") {
                     return (<li key={idx} >Was Removed</li>);
                   }
                   // increased trim length to 60 characters
@@ -29,8 +46,10 @@ export function Articles(params) {
               return (<li key={idx}>No Item</li>);
               }
             })
-        }</ol>
-      </div>
-    )
-  
-  }
+          }</ol>
+        </div>
+      )}
+    </div>
+  );
+
+}

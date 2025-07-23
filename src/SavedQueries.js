@@ -23,7 +23,7 @@ export function SavedQueries(params) {
           key={idx}
           onClick={() => onSavedQueryClick(item)}
           className={(item.queryName === params.selectedQueryName) ? "selected" : ""}
-        ><span className="queryTitle">{trimTitle}</span>{"- News articles about "} <span className = "queryProperties">{item.q}</span> {" in " } <span className = "queryProperties">{getLanguageName(item.language)}</span>  {" with a page limit of "} <span className = "queryProperties">{item.pageSize}</span>
+        ><span className="queryTitle">{trimTitle}</span>{"- News articles about "} <span className="queryProperties">{item.q}</span> {" in "} <span className="queryProperties">{getLanguageName(item.language)}</span>  {" with a page limit of "} <span className="queryProperties">{item.pageSize}</span>
         </li>
       );
     })
