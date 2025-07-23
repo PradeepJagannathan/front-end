@@ -13,13 +13,19 @@ export function Articles(params) {
                   if(item.title === "[Removed]"){
                     return (<li key={idx} >Was Removed</li>);
                   }
-                  let trimTitle = item.title.substring(0,30);
-                  return (<li key={idx}>{trimTitle}<a href={item.url} target="_blank" rel="noreferrer" >&nbsp;Link</a></li>);    
-                }else{
-                  return (<li key={idx}>No Title</li>);
-                }
-              }else{
-                return (<li key={1} >No Item</li>);
+                  // increased trim length to 60 characters
+                  let trimTitle = item.title.length > 60 ? item.title.substring(0, 60) + "..." : item.title;
+                return (
+                  <li key={idx}>
+                    {trimTitle}
+                    <a href={item.url} target="_blank" rel="noreferrer">&nbsp;Link</a>
+                  </li>
+                );
+              } else {
+                return (<li key={idx}>No Title</li>);
+              }
+            } else {
+              return (<li key={idx}>No Item</li>);
               }
             })
         }</ol>
