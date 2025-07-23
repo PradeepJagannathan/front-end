@@ -12,6 +12,7 @@ export function Articles(params) {
   };
 
   return (
+
     <div className="container">
       <p><strong>Query:</strong> {queryName}</p>
       <p><strong>Count:</strong> {articleCount}</p>
@@ -22,24 +23,27 @@ export function Articles(params) {
 
       {showList && (
         <div id="articleList">
-          <ol>
-            {articles.map((item, idx) => {
-              if (!item) return <li key={idx}>No Item</li>;
-              if (!item.title) return <li key={idx}>No Title</li>;
-              if (item.title === "[Removed]") return <li key={idx}>Was Removed</li>;
-
-              const trimTitle = item.title.substring(0, 30);
-              return (
-                <li key={idx}>
-                  {trimTitle}
-                  <a href={item.url} target="_blank" rel="noreferrer"> &rarr; Link</a>
-                </li>
-              );
-            })}
-          </ol>
+          <ol >{
+            articles.map((item, idx) => {
+              if (item) {
+                if (item.title) {
+                  if (item.title === "[Removed]") {
+                    return (<li key={idx} >Was Removed</li>);
+                  }
+                  // increased trim length to 60 characters
+                  let trimTitle = item.title.length > 60 ? item.title.substring(0, 60) + "..." : item.title;
+                  return (<li key={idx}>{trimTitle}<a href={item.url} target="_blank" rel="noreferrer" >&nbsp;Link</a></li>);
+                } else {
+                  return (<li key={idx}>No Title</li>);
+                }
+              } else {
+                return (<li key={1} >No Item</li>);
+              }
+            })
+          }</ol>
         </div>
       )}
     </div>
-
   );
+
 }
