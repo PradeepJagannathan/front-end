@@ -7,20 +7,40 @@ export function LoginForm(params) {
     };
 
     return (
-        <div className="box" style={{ maxWidth: "unset" }}>
+        <div className="box login-box">
             <button onClick={params.login}>
-                {(params.currentUser) ? "Logout" : "Login"}
+                {params.currentUser ? "Logout" : "Login"}
             </button>
-            &nbsp;User: <span style={{ fontWeight: "bold" }} >{(params.currentUser) ? params.currentUser.user : "not logged in"}</span>
-            <div className={(params.currentUser) ? "hidden" : "visible"}>
-                <div>
-                    <label htmlFor="user">User: </label>
-                    <input type="text" size={10} id="user" name="user" value={params.credentials.user} onChange={handleChange} />
+            <div>
+                Current&nbsp;User:{" "}
+                <span style={{ fontWeight: "bold" }}>
+                    {params.currentUser ? params.currentUser.user : "not logged in"}
+                </span>
+            </div>
+
+            <div className={params.currentUser ? "hidden" : "visible"}>
+                <div className="form-row">
+                    <label htmlFor="user">User:</label>
+                    <input
+                        type="text"
+                        id="user"
+                        name="user"
+                        value={params.credentials.user}
+                        onChange={handleChange}
+                        className="login-input"
+                    />
                 </div>
 
-                <div>
-                    <label htmlFor="password">Password: </label>
-                    <input type="text" size={10} id="password" name="password" value={params.credentials.password} onChange={handleChange} />
+                <div className="form-row">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={params.credentials.password}
+                        onChange={handleChange}
+                        className="login-input"
+                    />
                 </div>
             </div>
         </div>

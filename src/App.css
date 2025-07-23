@@ -1,20 +1,160 @@
-ol{
-  font-size: small;
+/* Base Styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(to bottom, #f0f4f8, #7fbefc, #035bb3);
+  color: #333;
+  box-sizing: border-box;
 }
 
-.scroll-container {
-  height: 400px; /* Adjust height as needed */
-  width: 300px;
-  overflow-y: scroll;
-  border: 1px solid #ddd; /* Optional border for styling */
+.app-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #00080f;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-header,p{
-  font-weight:bold;
+/* Container for main content */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .articles-scroll-container {
   height: 150px;  /*predefined height*/
   overflow-y: auto;  /*enable vertical scroll when content overflows*/
   padding: 5px;
+}
+
+/* Header + Text */
+h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+p {
+  font-size: 1rem;
+  margin: 0.25rem 0 1rem;
+}
+
+/* Button Styles */
+button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+button:hover {
+  background-color: #2980b9;
+  transform: scale(1.03);
+}
+
+/* Article List */
+ol {
+  font-size: 1rem;
+  padding-left: 20px;
+  list-style-type: decimal;
+}
+
+.login-box {
+  max-width: 300px;
+  max-height: 100px;
+  overflow: auto;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background-color: #2980b9;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.25rem;
+}
+
+.login-input {
+  padding: 6px;
+  font-size: 0.85rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#articleList li {
+  margin-bottom: 0.75rem;
+  padding: 1rem;
+  background-color: #fefefe;
+  border-left: 5px solid #3498db;
+  border-radius: 6px;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+#articleList li:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+a {
+  color: #e67e22;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  #articleList li {
+    font-size: 0.95rem;
+  }
 }

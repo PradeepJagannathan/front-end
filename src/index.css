@@ -34,19 +34,6 @@ code {
   flex-direction: row;
 }
 
-.box{
-  border:1px solid black;
-  flex:1;
-  padding: 5px;
-  max-width: 300px;
-  font-size: small;
-}
-
-.box span{
-  padding: 3px;
-  text-align: center;
-}
-
 .title{
   font-weight: bold;
   display: block;

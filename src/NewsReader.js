@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { exampleQuery, exampleData } from "./data";
 import { LoginForm } from "./LoginForm";
 
-
 export function NewsReader() {
   const [query, setQuery] = useState(exampleQuery); // latest query send to newsapi
   const [data, setData] = useState(exampleData); // current data returned from newsapi
@@ -53,9 +52,9 @@ export function NewsReader() {
         } else {
           alert(
             "Error during authentication! " +
-              credentials.user +
-              "/" +
-              credentials.password
+            credentials.user +
+            "/" +
+            credentials.password
           );
           setCurrentUser(null);
         }
@@ -105,7 +104,7 @@ export function NewsReader() {
     }
     if (savedQueries.length >= 3 && currentUserMatches("guest")) {
       alert(
-        "guest users cannot submit new queries once saved query count is 3or greater!"
+        "Guest users cannot submit new queries once saved query count is 3 or greater!"
       );
       return;
     }
@@ -154,34 +153,38 @@ export function NewsReader() {
   return (
     <div>
       <div>
-        <LoginForm
-          login={login}
-          credentials={credentials}
-          currentUser={currentUser}
-          setCredentials={setCredentials}
-        />
+        <div>
+          <LoginForm
+            login={login}
+            credentials={credentials}
+            currentUser={currentUser}
+            setCredentials={setCredentials}
+          />
+        </div>
         <section className="parent">
-          <div className="box">
-            <span className="title">Query Form</span>
-            <QueryForm
-              currentUser={currentUser}
-              setFormObject={setQueryFormObject}
-              formObject={queryFormObject}
-              submitToParent={onFormSubmit}
-            />
-          </div>
-          <div className="box">
-            <span className="title">Saved Queries</span>
-            <SavedQueries
-              savedQueries={savedQueries}
-              selectedQueryName={query.queryName}
-              onQuerySelect={onSavedQuerySelect}
-            />
-          </div>
-          <div className="box">
-            <span className="title">Articles List</span>
-            <div className="articles-scroll-container">
+          <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+            <div className="box">
+              <span className="title">Query Form</span>
+              <QueryForm
+                currentUser={currentUser}
+                setFormObject={setQueryFormObject}
+                formObject={queryFormObject}
+                submitToParent={onFormSubmit}
+              />
+            </div>
+            <div className="box">
+              <span className="title">Saved Queries</span>
+              <SavedQueries
+                savedQueries={savedQueries}
+                selectedQueryName={query.queryName}
+                onQuerySelect={onSavedQuerySelect}
+              />
+            </div>
+            <div className="box">
+              <span className="title">Articles List</span>
+              <div className="articles-scroll-container">
               <Articles query={query} data={data} />
+              </div>
             </div>
           </div>
         </section>

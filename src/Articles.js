@@ -12,11 +12,10 @@ export function Articles(params) {
   };
 
   return (
-    <div>
-      Query: {queryName}
-      <br />Count: {articleCount}
-      <br />
-      <br />
+    <div className="container">
+      <h2>Query Results</h2>
+      <p><strong>Query:</strong> {queryName}</p>
+      <p><strong>Count:</strong> {articleCount}</p>
 
       <button onClick={toggleList}>
         {showList ? 'Hide Query Results' : 'Show Query Results'}
@@ -34,7 +33,7 @@ export function Articles(params) {
               return (
                 <li key={idx}>
                   {trimTitle}
-                  <a href={item.url} target="_blank" rel="noreferrer">&nbsp;Link</a>
+                  <a href={item.url} target="_blank" rel="noreferrer"> &rarr; Link</a>
                 </li>
               );
             })}
@@ -42,5 +41,6 @@ export function Articles(params) {
         </div>
       )}
     </div>
+
   );
 }
