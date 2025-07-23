@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { exampleQuery, exampleData } from "./data";
 import { LoginForm } from "./LoginForm";
 
+
 export function NewsReader() {
   const [query, setQuery] = useState(exampleQuery); // latest query send to newsapi
   const [data, setData] = useState(exampleData); // current data returned from newsapi
@@ -179,7 +180,9 @@ export function NewsReader() {
           </div>
           <div className="box">
             <span className="title">Articles List</span>
-            <Articles query={query} data={data} />
+            <div className="articles-scroll-container">
+              <Articles query={query} data={data} />
+            </div>
           </div>
         </section>
       </div>

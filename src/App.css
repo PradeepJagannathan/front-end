@@ -12,3 +12,9 @@ ol{
 header,p{
   font-weight:bold;
 }
+
+.articles-scroll-container {
+  height: 150px;  /*predefined height*/
+  overflow-y: auto;  /*enable vertical scroll when content overflows*/
+  padding: 5px;
+}
