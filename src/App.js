@@ -5,11 +5,13 @@ function App() {
 
   return (
     <div>
-      <header>
-        <p>News Reader App</p>
-      </header>
-      <NewsReader />
-    </div>
+      <div className="main-layout">
+        <header>
+          <h1 className="app-title">News Reader App</h1>
+        </header>
+        <NewsReader />
+      </div>
+    </div >
   );
 }
 
