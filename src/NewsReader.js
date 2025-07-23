@@ -151,44 +151,43 @@ export function NewsReader() {
   }, []);
 
   return (
-    <div>
-      <div>
-        <div>
-          <LoginForm
-            login={login}
-            credentials={credentials}
-            currentUser={currentUser}
-            setCredentials={setCredentials}
-          />
-        </div>
-        <section className="parent">
-          <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
-            <div className="box">
-              <span className="title">Query Form</span>
-              <QueryForm
-                currentUser={currentUser}
-                setFormObject={setQueryFormObject}
-                formObject={queryFormObject}
-                submitToParent={onFormSubmit}
-              />
-            </div>
-            <div className="box">
-              <span className="title">Saved Queries</span>
-              <SavedQueries
-                savedQueries={savedQueries}
-                selectedQueryName={query.queryName}
-                onQuerySelect={onSavedQuerySelect}
-              />
-            </div>
-            <div className="box">
-              <span className="title">Articles List</span>
-              <div className="articles-scroll-container">
+    <div className="newsreader-layout">
+      <div className="login-box">
+        <LoginForm
+          login={login}
+          credentials={credentials}
+          currentUser={currentUser}
+          setCredentials={setCredentials}
+        />
+      </div>
+
+      <section className="parent">
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+          <div className="box">
+            <span className="title">Query Form</span>
+            <QueryForm
+              currentUser={currentUser}
+              setFormObject={setQueryFormObject}
+              formObject={queryFormObject}
+              submitToParent={onFormSubmit}
+            />
+          </div>
+          <div className="box">
+            <span className="title">Saved Queries</span>
+            <SavedQueries
+              savedQueries={savedQueries}
+              selectedQueryName={query.queryName}
+              onQuerySelect={onSavedQuerySelect}
+            />
+          </div>
+          <div className="box">
+            <span className="title">Articles List</span>
+            <div className="articles-scroll-container">
               <Articles query={query} data={data} />
-              </div>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

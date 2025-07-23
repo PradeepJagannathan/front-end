@@ -13,7 +13,6 @@ export function Articles(params) {
 
   return (
     <div className="container">
-      <h2>Query Results</h2>
       <p><strong>Query:</strong> {queryName}</p>
       <p><strong>Count:</strong> {articleCount}</p>
 

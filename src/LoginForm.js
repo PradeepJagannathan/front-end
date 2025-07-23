@@ -7,7 +7,7 @@ export function LoginForm(params) {
     };
 
     return (
-        <div className="box login-box">
+        <div>
             <button onClick={params.login}>
                 {params.currentUser ? "Logout" : "Login"}
             </button>
