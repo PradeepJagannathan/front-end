@@ -17,8 +17,9 @@ export function Articles(params) {
                   let trimTitle = item.title.length > 60 ? item.title.substring(0, 60) + "..." : item.title;
                 return (
                   <li key={idx}>
-                    {trimTitle}
-                    <a href={item.url} target="_blank" rel="noreferrer">&nbsp;Link</a>
+                    <a href={item.url} target="_blank" rel="noreferrer">
+                      {trimTitle}
+                    </a>
                   </li>
                 );
               } else {
