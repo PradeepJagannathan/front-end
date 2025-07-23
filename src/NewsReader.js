@@ -122,6 +122,22 @@ export function NewsReader() {
     setQuery(queryObject);
   }
 
+  function onQueriesReset() {
+    if (currentUser === null) {
+      alert("Log in if you want to reset queries!");
+      return;
+    }
+    
+    /*if (!currentUserMatches("admin")) {
+      alert("Only admin users can reset queries!");
+      return;
+    }*/
+
+    setSavedQueries([]);
+    saveQueryList([]);
+    setQuery(exampleQuery);
+  }
+
   async function getNews(queryObject) {
     if (queryObject.q) {
       console.log("Fetching news with query:", queryObject);
@@ -176,6 +192,8 @@ export function NewsReader() {
               savedQueries={savedQueries}
               selectedQueryName={query.queryName}
               onQuerySelect={onSavedQuerySelect}
+              queriesReset={onQueriesReset}
+              currentUser={currentUser}
             />
           </div>
           <div className="box">

@@ -34,6 +34,15 @@ code {
   flex-direction: row;
 }
 
+.parentSavedQueries{
+  display:flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  flex-basis: fit-content;
+  flex-flow: column nowrap;
+}
+
 .box{
   border:1px solid black;
   flex:1;
@@ -56,6 +65,7 @@ code {
 
 .selected{
   font-weight: bold;
+  color: rgb(59, 139, 185)
 }
 
 .hidden{
@@ -70,4 +80,16 @@ code {
 }
 .moreVisible{
   display:block;
+}
+
+.queryTitle{
+  font-weight: bold;
+  text-decoration-line: underline;
+  color: rgb(16, 74, 233);
+
+}
+
+.queryProperties{
+  font-style: italic;
+  color: rgb(224, 51, 187);
 }
