@@ -14,8 +14,8 @@ export function Articles(params) {
   return (
 
     <div className="container">
-      <p><strong>Query:</strong> {queryName}</p>
-      <p><strong>Count:</strong> {articleCount}</p>
+      <p><strong>Selected Query:</strong> {queryName}</p>
+      <p><strong>Article Results Count:</strong> {articleCount}</p>
 
       <button onClick={toggleList}>
         {showList ? 'Hide Query Results' : 'Show Query Results'}

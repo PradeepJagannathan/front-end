@@ -178,30 +178,32 @@ export function NewsReader() {
       </div>
 
       <section className="parent">
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
-          <div className="box">
-            <span className="title">Query Form</span>
-            <QueryForm
-              currentUser={currentUser}
-              setFormObject={setQueryFormObject}
-              formObject={queryFormObject}
-              submitToParent={onFormSubmit}
-            />
-          </div>
-          <div className="box">
-            <span className="title">Saved Queries</span>
-            <SavedQueries
-              savedQueries={savedQueries}
-              selectedQueryName={query.queryName}
-              onQuerySelect={onSavedQuerySelect}
-              queriesReset={onQueriesReset}
-              currentUser={currentUser}
-            />
-          </div>
-          <div className="box">
-            <span className="title">Articles List</span>
-            <div className="articles-scroll-container">
-              <Articles query={query} data={data} />
+        <div className="container">
+          <div className="grid">
+            <div className="box query-box">
+              <span className="title">Query Form</span>
+              <QueryForm
+                currentUser={currentUser}
+                setFormObject={setQueryFormObject}
+                formObject={queryFormObject}
+                submitToParent={onFormSubmit}
+              />
+            </div>
+            <div className="box saved-query-box">
+              <span className="title">Saved Queries</span>
+              <SavedQueries
+                savedQueries={savedQueries}
+                selectedQueryName={query.queryName}
+                onQuerySelect={onSavedQuerySelect}
+                queriesReset={onQueriesReset}
+                currentUser={currentUser}
+              />
+            </div>
+            <div className="box articles-box">
+              <span className="title">Articles List</span>
+              <div className="articles-scroll-container">
+                <Articles query={query} data={data} />
+              </div>
             </div>
           </div>
         </div>
