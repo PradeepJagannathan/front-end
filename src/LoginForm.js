@@ -3,19 +3,19 @@ export function LoginForm(params) {
     const handleChange = (event) => {
         let newCredentials = { ...params.credentials };
         newCredentials[event.target.name] = event.target.value;
+        console.log("newCredentials: ", newCredentials);
         params.setCredentials(newCredentials);
     };
 
     return (
         <div>
-            <button onClick={params.login}>
-                {params.currentUser ? "Logout" : "Login"}
-            </button>
             <div>
                 Current&nbsp;User:{" "}
                 <span style={{ fontWeight: "bold" }}>
                     {params.currentUser ? params.currentUser.user : "not logged in"}
                 </span>
+                <br />
+                <br />
             </div>
 
             <div className={params.currentUser ? "hidden" : "visible"}>
@@ -42,6 +42,10 @@ export function LoginForm(params) {
                         className="login-input"
                     />
                 </div>
+
+                <button onClick={params.login}>
+                    {params.currentUser ? "Logout" : "Login"}
+                </button>
             </div>
         </div>
     );
