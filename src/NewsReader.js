@@ -14,6 +14,7 @@ export function NewsReader() {
   const [credentials, setCredentials] = useState({ user: "", password: "" });
   const urlNews = "/news";
   const urlQueries = "/queries";
+  const urlDefaultQueries = "/queries/default";
   const urlUsersAuth = "/users/authenticate";
 
   useEffect(() => {
@@ -22,11 +23,25 @@ export function NewsReader() {
 
   async function getQueryList() {
     try {
-      const response = await fetch(urlQueries);
-      if (response.ok) {
-        const data = await response.json();
-        console.log("savedQueries has been retrieved: ");
-        setSavedQueries(data);
+      console.log ("current user : ", currentUser);
+      if (currentUser === null) {
+        // if no user is logged in, load default queries
+        const response = await fetch(urlDefaultQueries);
+        if (response.ok) {
+          const data = await response.json();
+          console.log("defaultQueries has been retrieved: ");
+          setSavedQueries(data);
+        }
+      }
+      // if a user is logged in, load saved queries
+      else {
+        console.log("currentUser is not null, fetching saved queries");
+        const response = await fetch(urlQueries);
+        if (response.ok) {
+          const data = await response.json();
+          console.log("savedQueries has been retrieved: ");
+          setSavedQueries(data);
+        }
       }
     } catch (error) {
       console.error("Error fetching news:", error);
@@ -34,6 +49,7 @@ export function NewsReader() {
   }
 
   async function login() {
+    console.log ("login display ");
     if (currentUser !== null) {
       // logout
       setCurrentUser(null);
@@ -152,7 +168,21 @@ export function NewsReader() {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
+
+        // Below code is to handle response text when nothing is returned from NewsAPI
+        
+        /*const text = await response.text();
+        console.log("Response text:", text);
+
+        if (!text) {
+          console.error("No data received from server");
+          setData({});
+          return;
+        }
+        const data = JSON.parse(text);
+        */
         const data = await response.json();
+        console.log("Parsed data:", data);
         setData(data);
       } catch (error) {
         console.error("Error fetching news:", error);
@@ -164,7 +194,7 @@ export function NewsReader() {
 
   useEffect(() => {
     getQueryList();
-  }, []);
+  }, [currentUser]);
 
   return (
     <div className="newsreader-layout">

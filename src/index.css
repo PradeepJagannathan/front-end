@@ -83,3 +83,14 @@ code {
 .moreVisible {
   display: block;
 }
+
+.queryTitle{
+  font-weight: bold;
+  text-decoration-line: underline;
+  color: rgb(16, 74, 233);
+
+}
+
+.queryProperties{
+  font-style: italic;
+}

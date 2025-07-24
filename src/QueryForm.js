@@ -29,8 +29,17 @@ export function QueryForm(params) {
     return false;
   }
 
+  function userLoggedIn() {
+    if (params.currentUser) {
+      return true;
+    }
+    return false;
+  }
+
   return (
-    <div>
+    <div> {
+      (params.currentUser)?
+    <div className={userLoggedIn() ? "visible" : "hidden"}>
       <form>
         <div
           className={currentUserIsAdmin() ? "visible" : "hidden"}
@@ -93,6 +102,9 @@ export function QueryForm(params) {
           <input type="button" value="Submit" onClick={onSubmitClick} />
         </span>
       </form>
+    </div>
+    : <div> <p style={{textAlign: "center"}}>Please log in to create or edit queries.</p></div>
+    }
     </div>
   );
 }
