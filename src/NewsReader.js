@@ -4,6 +4,7 @@ import { Articles } from "./Articles";
 import { useState, useEffect } from "react";
 import { exampleQuery, exampleData } from "./data";
 import { LoginForm } from "./LoginForm";
+import { useCallback } from "react";
 
 export function NewsReader() {
   const [query, setQuery] = useState(exampleQuery); // latest query send to newsapi
@@ -21,35 +22,30 @@ export function NewsReader() {
     getNews(query);
   }, [query]);
 
-  async function getQueryList() {
+  const getQueryList = useCallback(async () => {
     try {
-      console.log ("current user : ", currentUser);
+      console.log("current user : ", currentUser);
       if (currentUser === null) {
-        // if no user is logged in, load default queries
         const response = await fetch(urlDefaultQueries);
         if (response.ok) {
           const data = await response.json();
-          console.log("defaultQueries has been retrieved: ");
           setSavedQueries(data);
         }
-      }
-      // if a user is logged in, load saved queries
-      else {
-        console.log("currentUser is not null, fetching saved queries");
+      } else {
         const response = await fetch(urlQueries);
         if (response.ok) {
           const data = await response.json();
-          console.log("savedQueries has been retrieved: ");
           setSavedQueries(data);
         }
       }
     } catch (error) {
-      console.error("Error fetching news:", error);
+      console.error("Error fetching queries:", error);
     }
-  }
+  }, [currentUser, urlDefaultQueries, urlQueries]);
+
 
   async function login() {
-    console.log ("login display ");
+    console.log("login display ");
     if (currentUser !== null) {
       // logout
       setCurrentUser(null);
@@ -170,7 +166,7 @@ export function NewsReader() {
         }
 
         // Below code is to handle response text when nothing is returned from NewsAPI
-        
+
         /*const text = await response.text();
         console.log("Response text:", text);
 
@@ -194,7 +190,7 @@ export function NewsReader() {
 
   useEffect(() => {
     getQueryList();
-  }, [currentUser]);
+  }, [getQueryList]);
 
   return (
     <div className="newsreader-layout">

@@ -29,7 +29,6 @@ body {
 /* Container for main content */
 .container {
   flex: 1;
-  min-height: 50vh;
   background-color: white;
   padding: 2rem;
   border-radius: 12px;
@@ -47,12 +46,11 @@ body {
 .box{
   flex:1;
   padding: 5px;
-  max-width: 300px;
   font-size: small;
 }
 
 .articles-scroll-container {
-  height: 50%;  /*predefined height*/
+  height: 500px;  /*predefined height*/
   overflow-y: auto;  /*enable vertical scroll when content overflows*/
   padding: 5px;
 }
