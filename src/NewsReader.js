@@ -30,12 +30,20 @@ export function NewsReader() {
         if (response.ok) {
           const data = await response.json();
           setSavedQueries(data);
+          setQuery(data[0]); // Set the first default query as the current query
         }
       } else {
         const response = await fetch(urlQueries);
         if (response.ok) {
           const data = await response.json();
           setSavedQueries(data);
+          if (data && data.length > 0) {
+            setQuery(data[0]); // Set the first saved query as the current query
+            setQueryFormObject(data[0]);
+          }
+          else{
+            setQuery(exampleQuery); // Fallback to example query if no saved queries
+          }
         }
       }
     } catch (error) {
@@ -147,6 +155,7 @@ export function NewsReader() {
     setSavedQueries([]);
     saveQueryList([]);
     setQuery(exampleQuery);
+    setQueryFormObject(exampleQuery);
   }
 
   async function getNews(queryObject) {
@@ -223,6 +232,7 @@ export function NewsReader() {
                 onQuerySelect={onSavedQuerySelect}
                 queriesReset={onQueriesReset}
                 currentUser={currentUser}
+                query={query}
               />
             </div>
             <div className="box articles-box">

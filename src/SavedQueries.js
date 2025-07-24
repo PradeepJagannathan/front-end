@@ -16,7 +16,6 @@ export function SavedQueries(params) {
 
   function getQueries() {
     return params.savedQueries.map((item, idx) => {
-      console.log("Saved Query:", item);
       let trimTitle = item.queryName.substring(0, 30);
       return (
         <li
