@@ -42,11 +42,12 @@ export function LoginForm(params) {
                         className="login-input"
                     />
                 </div>
-
-                <button onClick={params.login}>
-                    {params.currentUser ? "Logout" : "Login"}
-                </button>
             </div>
+
+            <button onClick={params.login}>
+                {params.currentUser ? "Logout" : "Login"}
+            </button>
+
         </div>
     );
 }
