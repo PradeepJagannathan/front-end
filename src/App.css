@@ -1,61 +1,116 @@
-/* Base Styling */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 20px;
-  background: linear-gradient(to bottom, #f0f4f8, #7fbefc, #035bb3);
-  color: #333;
+/* Base Reset & Styling */
+* {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* Header Styling */
+header {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  background-image: url("/public/NewsReaderImage.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: white;
+  padding: clamp(2rem, 5vw, 4rem) 1rem;
+  overflow: hidden;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+header h1 {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #f0f4f8, #7fbefc, #035bb3);
+  color: #333;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+/* App Title */
 .app-title {
   text-align: center;
-  font-size: 2.5rem;
-  color: #00080f;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  color: #feffff;
   margin-bottom: 2rem;
   font-weight: 700;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
+/* Layout Containers */
 .main-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.newsreader-layout {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 1.5rem;
-  padding: 1rem;
-  flex-wrap: wrap; /* makes it responsive */
+  width: 100%;
+  flex-wrap: nowrap; /* prevent premature wrapping */
 }
 
-/* Container for main content */
+/* Container takes up the rest of the space */
 .container {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
   background-color: white;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Grid layout inside container */
+/* Grid Layout */
 .grid {
   display: grid;
-  grid-template-columns: .8fr 1.6fr 1.6fr;
+  grid-template-columns: 0.8fr 1.6fr 1.6fr;
   gap: 1rem;
   width: 100%;
 }
 
-.box{
-  flex:1;
-  padding: 5px;
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Box Styling */
+.box {
+  flex: 1;
+  padding: 0.5rem;
   font-size: small;
+  width: 100%;
 }
 
+/* Scroll Container */
 .articles-scroll-container {
-  height: 500px;  /*predefined height*/
-  overflow-y: auto;  /*enable vertical scroll when content overflows*/
+  height: 500px;
+  overflow-y: auto;
   padding: 5px;
 }
 
-/* Header + Text */
+/* Text Styles */
 h2 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
@@ -67,7 +122,7 @@ p {
   margin: 0.25rem 0 1rem;
 }
 
-/* Button Styles */
+/* Buttons */
 button {
   background-color: #3498db;
   color: white;
@@ -86,25 +141,35 @@ button:hover {
 }
 
 /* Article List */
-ol {
-  font-size: 1rem;
-  padding-left: 20px;
-  list-style-type: decimal;
+#articleList li {
+  margin-bottom: 0.75rem;
+  padding: 1rem;
+  background-color: #fefefe;
+  border-left: 5px solid #3498db;
+  border-radius: 6px;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-.newsreader-layout {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  width: 100%;
+#articleList li:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
-/* Login box takes 25% width of screen */
+/* Links */
+a {
+  color: #e67e22;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Login box takes up minimal space on left */
 .login-box {
-  flex: 0 0 25%;
-  max-width: 300px;
+  flex: 0 0 250px;
+  max-width: 250px;
   min-width: 200px;
   padding: 0.75rem;
   background-color: #ffffff;
@@ -120,15 +185,6 @@ ol {
   width: 100%;
   padding: 5px 10px;
   font-size: 0.8rem;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.login-box button:hover {
-  background-color: #2980b9;
 }
 
 .form-row {
@@ -143,58 +199,25 @@ ol {
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
-  box-sizing: border-box;
 }
 
-#articleList li {
-  margin-bottom: 0.75rem;
-  padding: 1rem;
-  background-color: #fefefe;
-  border-left: 5px solid #3498db;
-  border-radius: 6px;
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-}
-
-#articleList li:hover {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
-}
-
-a {
-  color: #e67e22;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive Design */
-@media (max-width: 400px) {
-  .main-layout {
+@media (max-width: 768px) {
+  .newsreader-layout {
     flex-direction: column;
     align-items: center;
-  }
-
-  .grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  .box {
-    width: 100%;
-    margin-bottom: 1rem;
   }
 
   .login-box {
     width: 90%;
     max-width: 300px;
-    font-size: 0.75rem;
   }
 
   .container {
     width: 95%;
     padding: 1rem;
   }
-}
 
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
